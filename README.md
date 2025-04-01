@@ -29,7 +29,7 @@ Web API em ASP.NET Core com Entity Framework para gerenciar usuários e tarefas.
 ## Configuração e Execução
 1. Clone o repositório:
    ```sh
-   git clone <URL_DO_REPOSITORIO>
+   git clone https://github.com/anderolimar/users-tasks-dotnet
    ```
 2. Navegue até a pasta do projeto:
    ```sh
@@ -67,7 +67,7 @@ dotnet test
 ```
 
 ## Debito Técnico
-- Aadicionar testes de Controllers
+- Adicionar testes de Controllers
 - Resolver Warnings
 
 ## Licença
