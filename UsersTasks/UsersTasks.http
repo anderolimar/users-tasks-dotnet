@@ -1,0 +1,6 @@
+@UsersTasks_HostAddress = http://localhost:5036
+
+GET {{UsersTasks_HostAddress}}/api/usuarios
+Accept: application/json
+
+###
