@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UsersTasks.Interfaces;
 using UsersTasks.Models;
+using UsersTasks.Models.Business;
 using UsersTasks.Models.Dto;
 using UsersTasks.Models.Responses;
 
@@ -12,9 +13,10 @@ namespace UsersTasks.Services
         private readonly ILogger<UsersService> _logger;
         private readonly ICacheService _cache;
 
-        public UsersService(IUsersRepository repository, ICacheService cache, ILogger<UsersService> _logger)  {
+        public UsersService(IUsersRepository repository, ICacheService cache, ILogger<UsersService> logger)  {
             _repository = repository;
             _cache = cache;
+            _logger = logger;
         }
 
         public async Task<UserResponse> GetUser(int id) {
@@ -37,9 +39,12 @@ namespace UsersTasks.Services
         {
             try
             {
-                var total = await _cache.GetOrAddCacheDataAsync($"GetUsers_Count_{page}_{pagesize}", _ => _repository.CountAsync());
+                var total = await _cache.GetOrAddCacheDataAsync(
+                    $"GetUsers_Count_{page}_{pagesize}", _ => _repository.CountAsync());
+                
                 var items = await _cache.GetOrAddCacheDataAsync(
                     $"GetUser_List_{page}_{pagesize}", _ => _repository.GetAllAsync(((page - 1) * pagesize), pagesize));
+                
                 return new UsersResponse(items, page, pagesize, total);
             }
             catch (Exception ex) {
@@ -56,8 +61,10 @@ namespace UsersTasks.Services
                 if (user != null) {
                     return new UserAlreadyExistsReponse();
                 }
+                
                 var userCreated = await _repository.InsertAsync(
                     new User() { Email = newUser.Email, Name = newUser.Name });
+                
                 return new NewUserResponse(userCreated);
             }
             catch (DbUpdateException ex) {

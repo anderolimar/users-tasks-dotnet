@@ -1,6 +1,6 @@
 ﻿using UsersTasks.Data;
 using UsersTasks.Interfaces;
-using UsersTasks.Models;
+using UsersTasks.Models.Business;
 
 namespace UsersTasks.Repositories
 {

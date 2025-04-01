@@ -4,7 +4,6 @@ using UsersTasks.Models.Dto;
 
 namespace UsersTasks.Models.Responses
 {
-
     public class AuthResponse: ApiResponse<Token>
     {
         public AuthResponse(): base() { }
@@ -13,8 +12,6 @@ namespace UsersTasks.Models.Responses
 
         public AuthResponse(ApiResponse apiResponse) : base(apiResponse) { }
     }
-
-    
 
     public class AuthInvalidCredentialReponse : AuthResponse
     {

@@ -16,7 +16,7 @@ namespace UsersTasks.Data
                 var userManager = scope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
                 var roleManager = scope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
 
-                if (userManager.Users.Any() == false)
+                if (userManager != null && userManager.Users.Any() == false)
                 {
                     var adminuser = new ApplicationUser
                     {
@@ -27,7 +27,7 @@ namespace UsersTasks.Data
                         SecurityStamp = Guid.NewGuid().ToString()
                     };
 
-                    if ((await roleManager.RoleExistsAsync(Roles.Admin)) == false)
+                    if (roleManager != null && (await roleManager.RoleExistsAsync(Roles.Admin)) == false)
                     {
                         logger.LogInformation("Admin role is creating");
                         var roleResult = await roleManager
@@ -68,7 +68,7 @@ namespace UsersTasks.Data
 
 
                     // Create User role if it doesn't exist
-                    if ((await roleManager.RoleExistsAsync(Roles.User)) == false)
+                    if (roleManager != null && (await roleManager.RoleExistsAsync(Roles.User)) == false)
                     {
                         var roleResult = await roleManager
                               .CreateAsync(new IdentityRole(Roles.User));

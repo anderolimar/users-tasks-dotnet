@@ -13,6 +13,9 @@ Web API em ASP.NET Core com Entity Framework para gerenciar usuários e tarefas.
 
 ## Endpoints
 
+### Autenticação
+- **POST** `/api/auth/login` → Gere token de acesso.
+
 ### Usuários
 - **POST** `/api/usuarios` → Criar um usuário.
 - **GET** `/api/usuarios/{id}` → Buscar um usuário pelo ID.
@@ -39,10 +42,17 @@ Web API em ASP.NET Core com Entity Framework para gerenciar usuários e tarefas.
 4. Execute a API:
    ```sh
    dotnet run
+
+   # Using https
+   dotnet run --launch-profile https
    ```
 5. Acesse a documentação Swagger em:
    ```
-   http://localhost:<PORT>/scalar
+   // http
+   http://localhost:5036/scalar
+ 
+   // https
+   https://localhost:7274/scalar
    ```
 
 ## Usuario Test
@@ -58,6 +68,7 @@ dotnet test
 
 ## Debito Técnico
 - Aadicionar testes de Controllers
+- Resolver Warnings
 
 ## Licença
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.

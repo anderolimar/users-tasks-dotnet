@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using NSubstitute;
 using UsersTasks.Interfaces;
 using UsersTasks.Models.Dto;
-using UsersTasks.Models;
 using UsersTasks.Services;
 using NSubstitute.ExceptionExtensions;
+using Microsoft.Extensions.Logging;
+using UsersTasks.Models.Business;
 
 namespace UsersTasksAPITests.Services
 {
@@ -25,7 +26,13 @@ namespace UsersTasksAPITests.Services
                 && u.Description == expectedUserTask.Description && u.Status == expectedUserTask.Status))
                 .Returns(Task.FromResult(expectedUserTask));
 
-            var service = new UserTasksService(userTaskRepo);
+            var cache = Substitute.For<ICacheService>();
+            cache.GetOrAddCacheDataAsync(Arg.Any<string>(), Arg.Any<Func<CancellationToken, Task<UserTask>>>())
+                .Returns(Task.FromResult(expectedUserTask));
+
+            var logger = Substitute.For<ILogger<UsersService>>();
+
+            var service = new UserTasksService(userTaskRepo, cache, logger);
             var result = await service.AddUserTask(expectedUserTask.UserId, new NewUserTask() { 
                 Title = expectedUserTask.Title, Description = expectedUserTask.Description, 
                 Status = expectedUserTask.Status});
@@ -51,7 +58,13 @@ namespace UsersTasksAPITests.Services
                 && u.Description == expectedUserTask.Description && u.Status == expectedUserTask.Status))
                 .Throws(new Exception());
 
-            var service = new UserTasksService(userTaskRepo);
+            var cache = Substitute.For<ICacheService>();
+            cache.GetOrAddCacheDataAsync(Arg.Any<string>(), Arg.Any<Func<CancellationToken, Task<UserTask>>>())
+                .Throws(new Exception());
+
+            var logger = Substitute.For<ILogger<UsersService>>();
+
+            var service = new UserTasksService(userTaskRepo, cache, logger);
             var result = await service.AddUserTask(expectedUserTask.UserId, new NewUserTask()
             {
                 Title = expectedUserTask.Title,

@@ -1,8 +1,8 @@
 ﻿using System.Reflection.Emit;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using UsersTasks.Models;
 using UsersTasks.Models.Auth;
+using UsersTasks.Models.Business;
 
 namespace UsersTasks.Data
 {

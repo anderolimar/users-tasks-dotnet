@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Connections.Features;
 using UsersTasks.Interfaces;
 using UsersTasks.Models;
+using UsersTasks.Models.Business;
 using UsersTasks.Models.Dto;
 using UsersTasks.Models.Responses;
 using UsersTasks.Repositories;
@@ -10,10 +11,12 @@ namespace UsersTasks.Services
     public class UserTasksService : IUserTasksService
     {
         IUserTasksRepository _repository;
+        private readonly ICacheService _cache;
         private readonly ILogger<UsersService> _logger;
-        public UserTasksService(IUserTasksRepository repository, ILogger<UsersService> logger)
+        public UserTasksService(IUserTasksRepository repository, ICacheService cache, ILogger<UsersService> logger)
         {
             _repository = repository;
+            _cache = cache;
             _logger = logger;
         }
 
@@ -21,8 +24,13 @@ namespace UsersTasks.Services
         {
             try
             {
-                var total = await _repository.CountAsync();
-                var items = await _repository.WhereAsync(i => i.UserId == userId, ((page - 1) * pagesize), pagesize);
+                var total = await _cache.GetOrAddCacheDataAsync(
+                    $"GetUserTasks_Count_{userId}_{page}_{pagesize}", _ => _repository.CountAsync());
+                
+                var items = await _cache.GetOrAddCacheDataAsync(
+                    $"GetUserTasks_List_{userId}_{page}_{pagesize}", _ => _repository
+                        .WhereAsync(i => i.UserId == userId, ((page - 1) * pagesize), pagesize));
+
                 return new UserTasksResponse(items, page, pagesize, total);
             }
             catch (Exception ex)

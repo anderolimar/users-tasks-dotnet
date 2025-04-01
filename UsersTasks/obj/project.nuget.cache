@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "urP5AG6EpsQ=",
+  "dgSpecHash": "/LoeYuhbOSc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ander\\Documents\\projects\\UsersTasks\\UsersTasks\\UsersTasks.csproj",
+  "projectFilePath": "C:\\Users\\ander\\Documents\\projects\\users-tasks-dotnet\\UsersTasks\\UsersTasks.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ander\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\ander\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

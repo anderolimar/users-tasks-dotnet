@@ -14,7 +14,7 @@ using UsersTasks.Services;
 
 namespace UsersTasks.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     [ApiController]
     public class AuthController : ApiController
     {

@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using UsersTasks.Models.Business;
 
 namespace UsersTasks.Models.Responses
 {

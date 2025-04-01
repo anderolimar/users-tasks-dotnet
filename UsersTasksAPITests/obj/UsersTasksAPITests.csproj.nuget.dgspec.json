@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ander\\Documents\\projects\\UsersTasks\\UsersTasksAPITests\\UsersTasksAPITests.csproj": {}
+    "C:\\Users\\ander\\Documents\\projects\\users-tasks-dotnet\\UsersTasksAPITests\\UsersTasksAPITests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ander\\Documents\\projects\\UsersTasks\\UsersTasksAPITests\\UsersTasksAPITests.csproj": {
+    "C:\\Users\\ander\\Documents\\projects\\users-tasks-dotnet\\UsersTasksAPITests\\UsersTasksAPITests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ander\\Documents\\projects\\UsersTasks\\UsersTasksAPITests\\UsersTasksAPITests.csproj",
+        "projectUniqueName": "C:\\Users\\ander\\Documents\\projects\\users-tasks-dotnet\\UsersTasksAPITests\\UsersTasksAPITests.csproj",
         "projectName": "UsersTasksAPITests",
-        "projectPath": "C:\\Users\\ander\\Documents\\projects\\UsersTasks\\UsersTasksAPITests\\UsersTasksAPITests.csproj",
+        "projectPath": "C:\\Users\\ander\\Documents\\projects\\users-tasks-dotnet\\UsersTasksAPITests\\UsersTasksAPITests.csproj",
         "packagesPath": "C:\\Users\\ander\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ander\\Documents\\projects\\UsersTasks\\UsersTasksAPITests\\obj\\",
+        "outputPath": "C:\\Users\\ander\\Documents\\projects\\users-tasks-dotnet\\UsersTasksAPITests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\ander\\Documents\\projects\\UsersTasks\\UsersTasks\\UsersTasks.csproj": {
-                "projectPath": "C:\\Users\\ander\\Documents\\projects\\UsersTasks\\UsersTasks\\UsersTasks.csproj"
+              "C:\\Users\\ander\\Documents\\projects\\users-tasks-dotnet\\UsersTasks\\UsersTasks.csproj": {
+                "projectPath": "C:\\Users\\ander\\Documents\\projects\\users-tasks-dotnet\\UsersTasks\\UsersTasks.csproj"
               }
             }
           }
@@ -95,14 +95,14 @@
         }
       }
     },
-    "C:\\Users\\ander\\Documents\\projects\\UsersTasks\\UsersTasks\\UsersTasks.csproj": {
+    "C:\\Users\\ander\\Documents\\projects\\users-tasks-dotnet\\UsersTasks\\UsersTasks.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ander\\Documents\\projects\\UsersTasks\\UsersTasks\\UsersTasks.csproj",
+        "projectUniqueName": "C:\\Users\\ander\\Documents\\projects\\users-tasks-dotnet\\UsersTasks\\UsersTasks.csproj",
         "projectName": "UsersTasks",
-        "projectPath": "C:\\Users\\ander\\Documents\\projects\\UsersTasks\\UsersTasks\\UsersTasks.csproj",
+        "projectPath": "C:\\Users\\ander\\Documents\\projects\\users-tasks-dotnet\\UsersTasks\\UsersTasks.csproj",
         "packagesPath": "C:\\Users\\ander\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ander\\Documents\\projects\\UsersTasks\\UsersTasks\\obj\\",
+        "outputPath": "C:\\Users\\ander\\Documents\\projects\\users-tasks-dotnet\\UsersTasks\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

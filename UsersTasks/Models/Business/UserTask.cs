@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace UsersTasks.Models
+namespace UsersTasks.Models.Business
 {
     public class UserTask
     {

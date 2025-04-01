@@ -1,13 +1,15 @@
 ﻿using UsersTasks.Interfaces;
 using NSubstitute;
-using UsersTasks.Models;
 using UsersTasks.Services;
 using UsersTasks.Models.Dto;
 using NSubstitute.ExceptionExtensions;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using UsersTasks.Models.Responses;
-using Microsoft.Extensions.Caching.Hybrid;
+using Microsoft.Extensions.Logging;
+using NSubstitute.ReturnsExtensions;
+using UsersTasks.Models.Business;
+
 
 namespace UsersTasksAPITests.Services
 {
@@ -23,7 +25,9 @@ namespace UsersTasksAPITests.Services
 
             var cache = Substitute.For<ICacheService>();
 
-            var service = new UsersService(userRepo, cache);
+            var logger = Substitute.For<ILogger<UsersService>>();
+
+            var service = new UsersService(userRepo, cache, logger);
             var result = await service.AddUser(new NewUser() { Name = expectedUser.Name, Email = expectedUser.Email });
 
             Assert.Equal(201, result.StatusCode);
@@ -35,12 +39,16 @@ namespace UsersTasksAPITests.Services
         {
             var expectedUser = new User() { Name = "Teste0", Email = "test@test.com" };
             var userRepo = Substitute.For<IUsersRepository>();
+            userRepo.FirstOrDefault(Arg.Any<Expression<Func<User, bool>>>())
+                .Returns(expectedUser);
             userRepo.InsertAsync(Arg.Is<User>(u => u.Name == expectedUser.Name && u.Email == expectedUser.Email))
                 .Throws(new DbUpdateException());
 
             var cache = Substitute.For<ICacheService>();
 
-            var service = new UsersService(userRepo, cache);
+            var logger = Substitute.For<ILogger<UsersService>>();
+
+            var service = new UsersService(userRepo, cache, logger);
             var result = await service.AddUser(new NewUser() { Name = expectedUser.Name, Email = expectedUser.Email });
 
             Assert.Equal(400, result.StatusCode);
@@ -54,12 +62,16 @@ namespace UsersTasksAPITests.Services
         {
             var expectedUser = new User() { Name = "Teste0", Email = "test@test.com" };
             var userRepo = Substitute.For<IUsersRepository>();
+            userRepo.FirstOrDefault(Arg.Any<Expression<Func<User, bool>>>())
+                .ReturnsNull();
             userRepo.InsertAsync(Arg.Is<User>(u => u.Name == expectedUser.Name && u.Email == expectedUser.Email))
-                .Throws(new Exception());
+               .Throws(new Exception());
 
             var cache = Substitute.For<ICacheService>();
 
-            var service = new UsersService(userRepo, cache);
+            var logger = Substitute.For<ILogger<UsersService>>();
+
+            var service = new UsersService(userRepo, cache, logger);
             var result = await service.AddUser(new NewUser() { Name = expectedUser.Name, Email = expectedUser.Email });
 
             Assert.Equal(500, result.StatusCode);
@@ -81,7 +93,9 @@ namespace UsersTasksAPITests.Services
             cache.GetOrAddCacheDataAsync(Arg.Any<string>(), Arg.Any<Func<CancellationToken, Task<User>>>())
                 .Returns(Task.FromResult(expectedUser));
 
-            var service = new UsersService(userRepo, cache);
+            var logger = Substitute.For<ILogger<UsersService>>();
+
+            var service = new UsersService(userRepo, cache, logger);
             var result = await service.GetUser(expectedUser.Id);
 
             Assert.Equal(200, result.StatusCode);
@@ -100,7 +114,9 @@ namespace UsersTasksAPITests.Services
             cache.GetOrAddCacheDataAsync(Arg.Any<string>(), Arg.Any<Func<CancellationToken, Task<User>>>())
                 .Throws(new Exception());
 
-            var service = new UsersService(userRepo, cache);
+            var log = Substitute.For<ILogger<UsersService>>();
+
+            var service = new UsersService(userRepo, cache, log);
             var result = await service.GetUser(expectedUser.Id);
 
 
@@ -133,7 +149,9 @@ namespace UsersTasksAPITests.Services
             cache.GetOrAddCacheDataAsync(Arg.Any<string>(), Arg.Any<Func<CancellationToken, Task<List<User>>>>())
                 .Returns(Task.FromResult(expectedUsersList));
 
-            var service = new UsersService(userRepo, cache);
+            var logger = Substitute.For<ILogger<UsersService>>();
+
+            var service = new UsersService(userRepo, cache, logger);
             var result = await service.GetUsers(expextedResult.PageNumber, expextedResult.PageSize);
 
             Assert.Equal(200, result.StatusCode);
@@ -162,7 +180,9 @@ namespace UsersTasksAPITests.Services
             cache.GetOrAddCacheDataAsync(Arg.Any<string>(), Arg.Any<Func<CancellationToken, Task<List<User>>>>())
                 .Throws(new Exception());
 
-            var service = new UsersService(userRepo, cache);
+            var logger = Substitute.For<ILogger<UsersService>>();
+
+            var service = new UsersService(userRepo, cache, logger);
             var result = await service.GetUsers(expextedResult.PageNumber, expextedResult.PageSize);
 
             Assert.Equal(500, result.StatusCode);

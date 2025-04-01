@@ -1,4 +1,4 @@
-﻿using UsersTasks.Models;
+﻿using UsersTasks.Models.Business;
 
 namespace UsersTasks.Interfaces
 {

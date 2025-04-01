@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace UsersTasks.Models
+namespace UsersTasks.Models.Business
 {
     public class User
     {
